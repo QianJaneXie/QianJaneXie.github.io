@@ -1,0 +1,327 @@
+/* Homepage layout and theme — loads after main.css */
+
+:root {
+  /* Cornell red — https://brand.cornell.edu/colors/ */
+  --cornell-red: #b31b1b;
+  --cornell-red-dark: #7a1212;
+  --site-bg: #f9f6f6;
+  --site-surface: #ffffff;
+  --site-text: #1c2128;
+  --site-muted: #5a6570;
+  --site-accent: var(--cornell-red);
+  --site-accent-dark: var(--cornell-red-dark);
+  --site-border: rgba(179, 27, 27, 0.14);
+  --site-radius: 10px;
+  --site-shadow: 0 4px 24px rgba(60, 12, 12, 0.08);
+  --site-max: 56rem;
+  /* Header text column narrower than main content */
+  --site-header-max: 40rem;
+  --site-section-gap: 2.75rem;
+  --site-content-pad: clamp(1rem, 4vw, 1.75rem);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--site-bg);
+  color: var(--site-text);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hero */
+.top-frame {
+  height: auto;
+  min-height: clamp(220px, 32vh, 320px);
+  padding: 0;
+  background-color: var(--site-accent-dark);
+  background-image:
+    linear-gradient(
+      125deg,
+      rgba(90, 18, 18, 0.9) 0%,
+      rgba(179, 27, 27, 0.82) 42%,
+      rgba(160, 35, 35, 0.72) 100%
+    ),
+    url("../img/palm.jpg");
+  background-repeat: no-repeat, no-repeat;
+  background-position: center bottom, center bottom;
+  background-size: cover, cover;
+}
+
+.top-frame .transparency {
+  background: transparent !important;
+  min-height: inherit;
+}
+
+.top-frame .title-holder {
+  width: 100%;
+  max-width: var(--site-header-max);
+  height: auto;
+  min-height: clamp(220px, 32vh, 320px);
+  margin: 0 auto;
+  padding: var(--site-content-pad);
+  display: flex;
+  align-items: center;
+}
+
+.top-frame .title-holder .row {
+  position: static;
+  transform: none;
+  width: 100%;
+  margin: 0;
+  align-items: center;
+}
+
+.top-frame .title-holder .row .banner-title {
+  position: static;
+  transform: none;
+  padding: 0.5rem 0;
+  max-width: 100%;
+}
+
+.top-frame .me-name {
+  font-size: clamp(1.85rem, 4vw, 2.5rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.35rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.top-frame .me-desc {
+  font-size: 1.05rem;
+  opacity: 0.95;
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+}
+
+.top-frame .me-contact {
+  font-size: 0.98rem;
+  margin-bottom: 0;
+  opacity: 0.98;
+}
+
+.top-frame .me-social-link {
+  padding: 0.2rem 0;
+  border-radius: 4px;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.top-frame .me-social-link:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+/* Main column */
+.main-frame {
+  margin-bottom: 3rem;
+}
+
+.main-frame .content-holder {
+  width: 100%;
+  max-width: var(--site-max);
+  padding: 2rem var(--site-content-pad) 3rem;
+  background: var(--site-surface);
+  margin-top: -1.5rem;
+  border-radius: var(--site-radius) var(--site-radius) 0 0;
+  box-shadow: var(--site-shadow);
+  border: 1px solid var(--site-border);
+  border-bottom: none;
+}
+
+.main-frame .content-holder > .row:first-of-type {
+  margin-top: 0;
+}
+
+.main-frame .content-holder h3 {
+  font-size: clamp(1.45rem, 2.6vw, 1.65rem);
+  font-weight: 600;
+  color: var(--site-accent-dark);
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 2px solid var(--site-border);
+  line-height: 1.25;
+}
+
+/*
+ * Section spacing: pad the row that opens each major block (col-md with h3 first).
+ * Avoids uneven gaps when the previous row’s last element has different margins.
+ */
+.main-frame .content-holder > .row:not(:first-child):has(> .col-md > h3:first-child) {
+  padding-top: var(--site-section-gap);
+}
+
+.main-frame .content-holder > .row:not(:first-child):has(> .col-md > h3:first-child) > .col-md > h3:first-child {
+  margin-top: 0;
+}
+
+.main-frame .content-holder > .row:first-of-type h3 {
+  margin-top: 0;
+}
+
+.main-frame .content-holder h4 {
+  font-size: 1.12rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.65rem;
+  color: var(--site-text);
+}
+
+.main-frame .content-holder h5 {
+  font-size: 1rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--site-muted);
+  font-weight: 600;
+}
+
+/* Publication category titles — larger than default h4/h5 */
+.main-frame .content-holder .publications-section h4 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-top: 1.65rem;
+  margin-bottom: 0.65rem;
+  color: var(--site-accent-dark);
+  line-height: 1.3;
+}
+
+.main-frame .content-holder .publications-section .publications-note + h4 {
+  margin-top: 0.55rem;
+}
+
+.main-frame .content-holder .publications-section h5 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.55rem;
+  color: var(--site-text);
+  line-height: 1.35;
+}
+
+.main-frame .content-holder .sec-passage {
+  text-align: left;
+  hyphens: auto;
+}
+
+.main-frame .content-holder .sec-passage p + p {
+  margin-top: 1rem;
+}
+
+.main-frame .content-holder a {
+  color: var(--site-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.main-frame .content-holder a:hover {
+  color: var(--site-accent-dark);
+}
+
+/* Job market callout */
+.job-market-notice {
+  margin: 1.35rem 0 0.85rem;
+  padding: 1rem 1.15rem;
+  background: linear-gradient(90deg, #fdf6f6 0%, #faefef 100%);
+  border: 1px solid rgba(179, 27, 27, 0.22);
+  border-left: 4px solid var(--cornell-red);
+  border-radius: var(--site-radius);
+  color: var(--site-text);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.job-market-notice a {
+  font-weight: 500;
+  color: var(--cornell-red-dark);
+}
+
+/* Education logos */
+.main-frame .content-holder .sec-logo {
+  height: 72px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  margin: 0 0 0.75rem;
+  display: block;
+}
+
+.main-frame .content-holder .education-card {
+  padding: 1rem 0.5rem 1.25rem;
+  margin-bottom: 0.5rem;
+  border-radius: var(--site-radius);
+  transition: background 0.15s ease;
+}
+
+@media (min-width: 768px) {
+  .main-frame .content-holder .education-card:hover {
+    background: rgba(179, 27, 27, 0.05);
+  }
+}
+
+.main-frame .content-holder .sec-text {
+  display: block;
+  vertical-align: unset;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--site-text);
+}
+
+/* Photo */
+.main-frame .me-photo {
+  border-radius: var(--site-radius);
+  border: 1px solid var(--site-border);
+  box-shadow: var(--site-shadow);
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 767.98px) {
+  .main-frame .me-photo {
+    margin-top: 1.5rem;
+    max-width: 220px;
+  }
+}
+
+/* Publication blocks */
+.main-frame .content-holder > .row .col-md > p {
+  margin-bottom: 1.1rem;
+}
+
+.main-frame .content-holder > .row .col-md > p:last-child {
+  margin-bottom: 0;
+}
+
+.publications-note {
+  margin-bottom: 0.85rem;
+  color: var(--site-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.main-frame .content-holder .publications-section p.paper-item {
+  margin-bottom: 0;
+}
+
+.publications-section p.paper-item ~ p.paper-item {
+  border-top: 1px solid var(--site-border);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.publications-section > p.paper-item:last-of-type {
+  margin-bottom: 0.35rem;
+}
+
+/* News item */
+.news-item {
+  margin: 0;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--site-border);
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
