@@ -6,18 +6,20 @@
   --cornell-red-dark: #7a1212;
   --site-bg: #f9f6f6;
   --site-surface: #ffffff;
-  --site-text: #1c2128;
-  --site-muted: #5a6570;
+  --site-text: #0d1117;
+  --site-muted: #3d444d;
   --site-accent: var(--cornell-red);
   --site-accent-dark: var(--cornell-red-dark);
   --site-border: rgba(179, 27, 27, 0.14);
   --site-radius: 10px;
   --site-shadow: 0 4px 24px rgba(60, 12, 12, 0.08);
-  --site-max: 56rem;
-  /* Header text column narrower than main content */
-  --site-header-max: 40rem;
+  /* Main white column + hero title width — match legacy main.css content-holder (900px) */
+  --site-max: min(900px, calc(100vw - 2rem));
   --site-section-gap: 2.75rem;
   --site-content-pad: clamp(1rem, 4vw, 1.75rem);
+  /* Two text scales: main copy = main.css `p` (About, etc.); supporting = job callout, sidebar, pub. note */
+  --site-copy-size: 1.15rem;
+  --site-supporting-size: 0.98rem;
 }
 
 html {
@@ -27,14 +29,21 @@ html {
 body {
   background: var(--site-bg);
   color: var(--site-text);
+  font-weight: 400;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Main copy: match theme color (Bootstrap `p` is larger but inherits gray from legacy rules) */
+.main-frame .content-holder p,
+.main-frame .content-holder li {
+  color: var(--site-text);
 }
 
 /* Hero */
 .top-frame {
   height: auto;
-  min-height: clamp(220px, 32vh, 320px);
+  min-height: clamp(120px, 15vh, 175px);
   padding: 0;
   background-color: var(--site-accent-dark);
   background-image:
@@ -57,13 +66,14 @@ body {
 
 .top-frame .title-holder {
   width: 100%;
-  max-width: var(--site-header-max);
+  max-width: var(--site-max);
   height: auto;
-  min-height: clamp(220px, 32vh, 320px);
+  min-height: clamp(120px, 15vh, 175px);
   margin: 0 auto;
-  padding: var(--site-content-pad);
+  padding: clamp(0.65rem, 2vw, 1rem) var(--site-content-pad);
   display: flex;
   align-items: center;
+  justify-content: flex-start;
 }
 
 .top-frame .title-holder .row {
@@ -77,41 +87,17 @@ body {
 .top-frame .title-holder .row .banner-title {
   position: static;
   transform: none;
-  padding: 0.5rem 0;
+  padding: 0;
   max-width: 100%;
 }
 
 .top-frame .me-name {
-  font-size: clamp(1.85rem, 4vw, 2.5rem);
+  font-size: clamp(1.55rem, 3.5vw, 2.1rem);
   font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.2;
-  margin-bottom: 0.35rem;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-}
-
-.top-frame .me-desc {
-  font-size: 1.05rem;
-  opacity: 0.95;
-  font-weight: 400;
-  margin-bottom: 0.75rem;
-}
-
-.top-frame .me-contact {
-  font-size: 0.98rem;
   margin-bottom: 0;
-  opacity: 0.98;
-}
-
-.top-frame .me-social-link {
-  padding: 0.2rem 0;
-  border-radius: 4px;
-  transition: opacity 0.15s ease, transform 0.15s ease;
-}
-
-.top-frame .me-social-link:hover {
-  opacity: 0.92;
-  transform: translateY(-1px);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 /* Main column */
@@ -120,8 +106,8 @@ body {
 }
 
 .main-frame .content-holder {
-  width: 100%;
-  max-width: var(--site-max);
+  width: 900px;
+  max-width: 100%;
   padding: 2rem var(--site-content-pad) 3rem;
   background: var(--site-surface);
   margin-top: -1.5rem;
@@ -205,8 +191,151 @@ body {
   hyphens: auto;
 }
 
+/* About me: bio uses full width of the left column (col-md-8); justified lines + pretty wrapping */
+.main-frame .content-holder .about-narrow {
+  max-width: none;
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
+}
+
+.main-frame .content-holder .about-narrow p {
+  text-wrap: pretty;
+  font-size: var(--site-copy-size);
+  line-height: 1.5;
+}
+
+.main-frame .content-holder .about-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  hyphens: none;
+  /* Shift portrait + contact together; shared left edge */
+  padding-left: clamp(1.5rem, 11vw, 3.5rem);
+}
+
+.main-frame .content-holder .about-side .me-photo {
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 1rem;
+  max-width: 188px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 235 / 315;
+  background-size: contain;
+  border-radius: var(--site-radius);
+  border: 1px solid var(--site-border);
+  box-shadow: var(--site-shadow);
+}
+
+.main-frame .content-holder .about-contact-stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: var(--site-supporting-size);
+  line-height: 1.55;
+  font-weight: 400;
+  color: var(--site-muted);
+}
+
+.main-frame .content-holder .about-contact-email {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.main-frame .content-holder .about-contact-socials {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  max-width: 100%;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.main-frame .content-holder .about-contact-stacked .me-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28em;
+  font-size: inherit;
+  font-weight: inherit;
+  color: var(--site-accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.main-frame .content-holder .about-contact-stacked .me-social-link:hover {
+  color: var(--site-accent-dark);
+  text-decoration: underline;
+}
+
+.main-frame .content-holder .about-contact-stacked .me-social-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 767.98px) {
+  .main-frame .content-holder .about-side {
+    margin-top: 1.25rem;
+    padding-left: 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .main-frame .content-holder .about-side .me-photo {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .main-frame .content-holder .about-contact-stacked {
+    align-items: center;
+  }
+
+  .main-frame .content-holder .about-contact-email {
+    justify-content: center;
+  }
+
+  .main-frame .content-holder .about-contact-socials {
+    align-items: center;
+  }
+}
+
 .main-frame .content-holder .sec-passage p + p {
   margin-top: 1rem;
+}
+
+/* Research interests — same size/line-height as About me paragraphs */
+.main-frame .content-holder .research-interests {
+  font-family: 'K2D', 'Noto Sans TC', sans-serif;
+  font-weight: 400;
+  font-size: var(--site-copy-size);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.main-frame .content-holder .research-interests ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.main-frame .content-holder .research-interests li {
+  margin-bottom: 0.4rem;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  text-wrap: pretty;
+}
+
+.main-frame .content-holder .research-interests li:last-child {
+  margin-bottom: 0;
 }
 
 .main-frame .content-holder a {
@@ -228,44 +357,13 @@ body {
   border-left: 4px solid var(--cornell-red);
   border-radius: var(--site-radius);
   color: var(--site-text);
-  font-size: 0.98rem;
+  font-size: var(--site-supporting-size);
   line-height: 1.55;
 }
 
 .job-market-notice a {
   font-weight: 500;
   color: var(--cornell-red-dark);
-}
-
-/* Education logos */
-.main-frame .content-holder .sec-logo {
-  height: 72px;
-  width: auto;
-  max-width: 100%;
-  object-fit: contain;
-  margin: 0 0 0.75rem;
-  display: block;
-}
-
-.main-frame .content-holder .education-card {
-  padding: 1rem 0.5rem 1.25rem;
-  margin-bottom: 0.5rem;
-  border-radius: var(--site-radius);
-  transition: background 0.15s ease;
-}
-
-@media (min-width: 768px) {
-  .main-frame .content-holder .education-card:hover {
-    background: rgba(179, 27, 27, 0.05);
-  }
-}
-
-.main-frame .content-holder .sec-text {
-  display: block;
-  vertical-align: unset;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--site-text);
 }
 
 /* Photo */
@@ -276,13 +374,6 @@ body {
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
-}
-
-@media (max-width: 767.98px) {
-  .main-frame .me-photo {
-    margin-top: 1.5rem;
-    max-width: 220px;
-  }
 }
 
 /* Publication blocks */
@@ -297,8 +388,8 @@ body {
 .publications-note {
   margin-bottom: 0.85rem;
   color: var(--site-muted);
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: var(--site-supporting-size);
+  line-height: 1.55;
 }
 
 .main-frame .content-holder .publications-section p.paper-item {
