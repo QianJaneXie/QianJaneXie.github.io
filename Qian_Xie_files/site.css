@@ -222,7 +222,8 @@ body {
   max-width: 188px;
   width: 100%;
   height: auto;
-  aspect-ratio: 235 / 315;
+  aspect-ratio: 3 / 4;
+  background: url("./photo_xq_dalian.jpg") no-repeat center;
   background-size: contain;
   border-radius: var(--site-radius);
   border: 1px solid var(--site-border);
