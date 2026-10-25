@@ -1,18 +1,19 @@
 /* Homepage layout and theme — loads after main.css */
 
 :root {
-  /* Cornell red — https://brand.cornell.edu/colors/ */
-  --cornell-red: #b31b1b;
-  --cornell-red-dark: #7a1212;
-  --site-bg: #f9f6f6;
+  /* Columbia visual identity — https://visualidentity.columbia.edu/content/color */
+  --columbia-blue: #b9d9eb; /* Pantone 290, official Columbia Blue */
+  --columbia-primary: #1d4f91; /* Pantone 7686, approved primary for text and UI */
+  --columbia-primary-dark: #143666;
+  --site-bg: #f3f7fb;
   --site-surface: #ffffff;
   --site-text: #0d1117;
   --site-muted: #3d444d;
-  --site-accent: var(--cornell-red);
-  --site-accent-dark: var(--cornell-red-dark);
-  --site-border: rgba(179, 27, 27, 0.14);
+  --site-accent: var(--columbia-primary);
+  --site-accent-dark: var(--columbia-primary-dark);
+  --site-border: rgba(29, 79, 145, 0.16);
   --site-radius: 10px;
-  --site-shadow: 0 4px 24px rgba(60, 12, 12, 0.08);
+  --site-shadow: 0 4px 24px rgba(20, 54, 102, 0.08);
   /* Main white column + hero title width — match legacy main.css content-holder (900px) */
   --site-max: min(900px, calc(100vw - 2rem));
   --site-section-gap: 2.75rem;
@@ -45,13 +46,13 @@ body {
   height: auto;
   min-height: clamp(120px, 15vh, 175px);
   padding: 0;
-  background-color: var(--site-accent-dark);
+  background-color: var(--columbia-blue);
   background-image:
     linear-gradient(
       125deg,
-      rgba(90, 18, 18, 0.9) 0%,
-      rgba(179, 27, 27, 0.82) 42%,
-      rgba(160, 35, 35, 0.72) 100%
+      rgba(185, 217, 235, 0.97) 0%,
+      rgba(185, 217, 235, 0.9) 46%,
+      rgba(156, 198, 224, 0.86) 100%
     ),
     url("../img/palm.jpg");
   background-repeat: no-repeat, no-repeat;
@@ -91,13 +92,19 @@ body {
   max-width: 100%;
 }
 
+.top-frame .title-holder .row .banner-title,
+.top-frame .title-holder .row .banner-title a {
+  color: var(--columbia-primary);
+}
+
 .top-frame .me-name {
   font-size: clamp(1.55rem, 3.5vw, 2.1rem);
   font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.2;
   margin-bottom: 0;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  color: var(--columbia-primary);
+  text-shadow: none;
 }
 
 /* Main column */
@@ -353,9 +360,9 @@ body {
 .job-market-notice {
   margin: 1.35rem 0 0.85rem;
   padding: 1rem 1.15rem;
-  background: linear-gradient(90deg, #fdf6f6 0%, #faefef 100%);
-  border: 1px solid rgba(179, 27, 27, 0.22);
-  border-left: 4px solid var(--cornell-red);
+  background: linear-gradient(90deg, #f7fbfe 0%, #e8f3fa 100%);
+  border: 1px solid rgba(29, 79, 145, 0.22);
+  border-left: 4px solid var(--columbia-primary);
   border-radius: var(--site-radius);
   color: var(--site-text);
   font-size: var(--site-supporting-size);
@@ -364,7 +371,7 @@ body {
 
 .job-market-notice a {
   font-weight: 500;
-  color: var(--cornell-red-dark);
+  color: var(--columbia-primary-dark);
 }
 
 /* Photo */
