@@ -1,20 +1,26 @@
 /* Homepage layout and theme — loads after main.css */
 
 :root {
-  /* Columbia visual identity — https://visualidentity.columbia.edu/content/color */
-  --columbia-blue: #b9d9eb; /* Pantone 290, official Columbia Blue */
-  --columbia-primary: #1d4f91; /* Pantone 7686, approved primary for text and UI */
-  --columbia-primary-dark: #143666;
-  --site-bg: #f3f7fb;
+  /* DAP Lab palette — https://daplab.cs.columbia.edu/files/css/style.css
+     Link blue is Columbia's digital primary (Pantone 7686). Navy is their hover. */
+  --dap-ink: #19212d;
+  --dap-muted: #5a6575;
+  --dap-faint: #8994a3;
+  --dap-rule: #e3e7ed;
+  --dap-surface: #f6f8fb;
+  --dap-navy: #012169;
+  --dap-link: #1d4f91;
+  --site-bg: #ffffff;
   --site-surface: #ffffff;
-  --site-text: #0d1117;
-  --site-muted: #3d444d;
-  --site-accent: var(--columbia-primary);
-  --site-accent-dark: var(--columbia-primary-dark);
-  --site-border: rgba(29, 79, 145, 0.16);
-  --site-radius: 10px;
-  --site-shadow: 0 4px 24px rgba(20, 54, 102, 0.08);
-  /* Main white column + hero title width — match legacy main.css content-holder (900px) */
+  --site-text: var(--dap-ink);
+  --site-muted: var(--dap-muted);
+  --site-accent: var(--dap-link);
+  --site-accent-dark: var(--dap-navy);
+  --site-border: var(--dap-rule);
+  --site-radius: 8px;
+  --site-shadow: none;
+  --site-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Noto Sans TC", "Liberation Sans", Arial, sans-serif;
+  /* Main column + title width — match legacy main.css content-holder (900px) */
   --site-max: min(900px, calc(100vw - 2rem));
   --site-section-gap: 2.75rem;
   --site-content-pad: clamp(1rem, 4vw, 1.75rem);
@@ -30,6 +36,7 @@ html {
 body {
   background: var(--site-bg);
   color: var(--site-text);
+  font-family: var(--site-font);
   font-weight: 400;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
@@ -39,25 +46,18 @@ body {
 .main-frame .content-holder p,
 .main-frame .content-holder li {
   color: var(--site-text);
+  font-family: var(--site-font);
 }
 
-/* Hero */
+/* Header — white field, name and a top rule in the same blue DAP Lab uses for links. */
 .top-frame {
   height: auto;
-  min-height: clamp(120px, 15vh, 175px);
+  min-height: 0;
   padding: 0;
-  background-color: var(--columbia-blue);
-  background-image:
-    linear-gradient(
-      125deg,
-      rgba(185, 217, 235, 0.97) 0%,
-      rgba(185, 217, 235, 0.9) 46%,
-      rgba(156, 198, 224, 0.86) 100%
-    ),
-    url("../img/palm.jpg");
-  background-repeat: no-repeat, no-repeat;
-  background-position: center bottom, center bottom;
-  background-size: cover, cover;
+  background: #fff;
+  background-image: none;
+  border-top: 4px solid var(--dap-link);
+  border-bottom: 1px solid var(--site-border);
 }
 
 .top-frame .transparency {
@@ -69,9 +69,9 @@ body {
   width: 100%;
   max-width: var(--site-max);
   height: auto;
-  min-height: clamp(120px, 15vh, 175px);
+  min-height: 0;
   margin: 0 auto;
-  padding: clamp(0.65rem, 2vw, 1rem) var(--site-content-pad);
+  padding: 1.65rem var(--site-content-pad) 1.2rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -94,16 +94,17 @@ body {
 
 .top-frame .title-holder .row .banner-title,
 .top-frame .title-holder .row .banner-title a {
-  color: var(--columbia-primary);
+  color: var(--dap-link);
 }
 
 .top-frame .me-name {
-  font-size: clamp(1.55rem, 3.5vw, 2.1rem);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  font-family: var(--site-font);
+  font-size: clamp(1.85rem, 4vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
   margin-bottom: 0;
-  color: var(--columbia-primary);
+  color: var(--dap-link);
   text-shadow: none;
 }
 
@@ -115,13 +116,12 @@ body {
 .main-frame .content-holder {
   width: 900px;
   max-width: 100%;
-  padding: 2rem var(--site-content-pad) 3rem;
-  background: var(--site-surface);
-  margin-top: -1.5rem;
-  border-radius: var(--site-radius) var(--site-radius) 0 0;
-  box-shadow: var(--site-shadow);
-  border: 1px solid var(--site-border);
-  border-bottom: none;
+  padding: 1.75rem var(--site-content-pad) 3.5rem;
+  background: transparent;
+  margin-top: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .main-frame .content-holder > .row:first-of-type {
@@ -129,14 +129,16 @@ body {
 }
 
 .main-frame .content-holder h3 {
-  font-size: clamp(1.45rem, 2.6vw, 1.65rem);
-  font-weight: 600;
-  color: var(--site-accent-dark);
+  font-family: var(--site-font);
+  font-size: clamp(1.35rem, 2.4vw, 1.5rem);
+  font-weight: 700;
+  color: var(--site-text);
   margin-top: 0;
   margin-bottom: 1rem;
-  padding-bottom: 0.45rem;
-  border-bottom: 2px solid var(--site-border);
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--site-border);
   line-height: 1.25;
+  letter-spacing: -0.015em;
 }
 
 /*
@@ -156,28 +158,34 @@ body {
 }
 
 .main-frame .content-holder h4 {
+  font-family: var(--site-font);
   font-size: 1.12rem;
   margin-top: 1.75rem;
   margin-bottom: 0.65rem;
   color: var(--site-text);
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .main-frame .content-holder h5 {
+  font-family: var(--site-font);
   font-size: 1rem;
   margin-top: 1.25rem;
   margin-bottom: 0.5rem;
-  color: var(--site-muted);
+  color: var(--site-text);
   font-weight: 600;
 }
 
 /* Publication category titles — larger than default h4/h5 */
 .main-frame .content-holder .publications-section h4 {
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-family: var(--site-font);
+  font-size: 1.28rem;
+  font-weight: 700;
   margin-top: 1.65rem;
   margin-bottom: 0.65rem;
-  color: var(--site-accent-dark);
+  color: var(--site-text);
   line-height: 1.3;
+  letter-spacing: -0.015em;
 }
 
 .main-frame .content-holder .publications-section .publications-note + h4 {
@@ -185,11 +193,12 @@ body {
 }
 
 .main-frame .content-holder .publications-section h5 {
-  font-size: 1.2rem;
+  font-family: var(--site-font);
+  font-size: 1.08rem;
   font-weight: 600;
   margin-top: 1.25rem;
   margin-bottom: 0.55rem;
-  color: var(--site-text);
+  color: var(--dap-muted);
   line-height: 1.35;
 }
 
@@ -317,7 +326,7 @@ body {
 
 /* Research interests — same size/line-height as About me paragraphs */
 .main-frame .content-holder .research-interests {
-  font-family: 'K2D', 'Noto Sans TC', sans-serif;
+  font-family: var(--site-font);
   font-weight: 400;
   font-size: var(--site-copy-size);
   line-height: 1.5;
@@ -347,22 +356,22 @@ body {
 }
 
 .main-frame .content-holder a {
-  color: var(--site-accent);
+  color: var(--dap-link);
+  text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
 }
 
 .main-frame .content-holder a:hover {
-  color: var(--site-accent-dark);
+  color: var(--dap-navy);
 }
 
-/* Job market callout */
+/* Callout — flat surface, same treatment as DAP Lab's info panels */
 .job-market-notice {
   margin: 1.35rem 0 0.85rem;
   padding: 1rem 1.15rem;
-  background: linear-gradient(90deg, #f7fbfe 0%, #e8f3fa 100%);
-  border: 1px solid rgba(29, 79, 145, 0.22);
-  border-left: 4px solid var(--columbia-primary);
+  background: var(--dap-surface);
+  border: 1px solid var(--dap-rule);
   border-radius: var(--site-radius);
   color: var(--site-text);
   font-size: var(--site-supporting-size);
@@ -371,7 +380,7 @@ body {
 
 .job-market-notice a {
   font-weight: 500;
-  color: var(--columbia-primary-dark);
+  color: var(--dap-link);
 }
 
 /* Photo */
