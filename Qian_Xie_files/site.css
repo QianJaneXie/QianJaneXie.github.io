@@ -10,7 +10,7 @@
   --dap-surface: #f6f8fb;
   --dap-navy: #012169;
   --dap-link: #1d4f91;
-  --site-bg: #ffffff;
+  --site-bg: #f4f7fb;
   --site-surface: #ffffff;
   --site-text: var(--dap-ink);
   --site-muted: var(--dap-muted);
@@ -49,15 +49,19 @@ body {
   font-family: var(--site-font);
 }
 
-/* Header — white field, name and a top rule in the same blue DAP Lab uses for links. */
+/* Header — photo band with a Columbia-blue wash, white name. Same shape as nairenc.github.io. */
 .top-frame {
-  height: auto;
-  min-height: 0;
+  height: min(16vh, 132px);
+  min-height: 96px;
   padding: 0;
-  background: #fff;
-  background-image: none;
-  border-top: 4px solid var(--dap-link);
-  border-bottom: 1px solid var(--site-border);
+  background-color: var(--dap-navy);
+  background-image:
+    linear-gradient(105deg, rgba(1, 33, 105, 0.62) 0%, rgba(29, 79, 145, 0.5) 100%),
+    url("./banner.jpg");
+  background-repeat: no-repeat;
+  background-position: center, center 58%;
+  background-size: cover;
+  border: none;
 }
 
 .top-frame .transparency {
@@ -68,10 +72,10 @@ body {
 .top-frame .title-holder {
   width: 100%;
   max-width: var(--site-max);
-  height: auto;
-  min-height: 0;
+  height: 100%;
+  min-height: 96px;
   margin: 0 auto;
-  padding: 1.65rem var(--site-content-pad) 1.2rem;
+  padding: 0 var(--site-content-pad);
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -94,18 +98,18 @@ body {
 
 .top-frame .title-holder .row .banner-title,
 .top-frame .title-holder .row .banner-title a {
-  color: var(--dap-link);
+  color: #fff;
 }
 
 .top-frame .me-name {
   font-family: var(--site-font);
-  font-size: clamp(1.85rem, 4vw, 2.35rem);
+  font-size: clamp(1.7rem, 4vw, 2.15rem);
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.15;
   margin-bottom: 0;
-  color: var(--dap-link);
-  text-shadow: none;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
 }
 
 /* Main column */
@@ -115,13 +119,14 @@ body {
 
 .main-frame .content-holder {
   width: 900px;
-  max-width: 100%;
+  max-width: calc(100% - 1.25rem);
   padding: 1.75rem var(--site-content-pad) 3.5rem;
-  background: transparent;
-  margin-top: 0;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
+  background: #fff;
+  margin-top: 0.85rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--site-border);
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(1, 33, 105, 0.08);
 }
 
 .main-frame .content-holder > .row:first-of-type {
@@ -285,7 +290,7 @@ body {
 
 .main-frame .content-holder .about-contact-stacked .me-social-link:hover {
   color: var(--site-accent-dark);
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .main-frame .content-holder .about-contact-stacked .me-social-icon {
@@ -357,13 +362,12 @@ body {
 
 .main-frame .content-holder a {
   color: var(--dap-link);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
+  text-decoration: none;
 }
 
 .main-frame .content-holder a:hover {
   color: var(--dap-navy);
+  text-decoration: none;
 }
 
 /* Callout — flat surface, same treatment as DAP Lab's info panels */
